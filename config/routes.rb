@@ -1,7 +1,6 @@
 Spree::Core::Engine.routes.draw do
-  namespace :spree do
-  get 'newslatter/create'
-  end
+  post 'newslatter/create', to: 'newslatter#create', as: :spree_newslatter
+
 
   # Add your extension routes here
 end

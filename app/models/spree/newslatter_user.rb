@@ -1,4 +1,3 @@
 class Spree::NewslatterUser < ActiveRecord::Base
-  has_many  :newslatter_user_taxons
-  has_many  :taxons, through: :newslatter_user_taxons
+  has_and_belongs_to_many :taxons, join_table: :spree_newslatter_user_taxons
 end
