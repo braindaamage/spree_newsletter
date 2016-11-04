@@ -6,10 +6,10 @@ class Spree::NewslatterController < ApplicationController
     respond_to do |format|
       if @newslatter_user.save
         flash[:notice] = 'Email agregado correctamente.'
-        format.html { redirect_to('/cybermonday_success') }
+        format.html { redirect_to('/content/cybermonday_success') }
       else
         flash[:error] = 'El email ya se encuentra guardado.'
-        format.html { redirect_to('/cybermonday_error') }
+        format.html { redirect_to('/content/cybermonday_error') }
       end
     end
   end
