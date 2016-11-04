@@ -6,7 +6,7 @@ class Spree::NewslatterController < ApplicationController
       if @newslatter_user.save
         flash[:notice] = 'Email agregado correctamente.'
       else
-        flash[:error] = 'Error, el email ingresado es incorrecto.'
+        flash[:error] = 'El email ya se encuentra guardado.'
       end
       format.html { redirect_to(Spree::Config.newslatter_redirect) }
     end
