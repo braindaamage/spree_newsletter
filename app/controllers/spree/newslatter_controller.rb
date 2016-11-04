@@ -1,4 +1,5 @@
 class Spree::NewslatterController < ApplicationController
+  skip_before_filter  :verify_authenticity_token, only: :create
 
   def create
     @newslatter_user = Spree::NewslatterUser.new(newslatter_user_params)
