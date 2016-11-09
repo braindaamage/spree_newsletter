@@ -37,3 +37,37 @@ require 'spree_newslatter/factories'
 ```
 
 Copyright (c) 2016 [name of extension creator], released under the New BSD License
+
+# Script to generate cvs
+
+
+```ruby
+base =  Spree::Taxonomy.all.pluck :name
+taxonomies = Spree::Taxon.where name: base
+taxonomies.size
+
+headers = taxonomies.pluck(:name)
+lines = []
+
+Spree::NewslatterUser.includes(:taxons).all.each do |user|
+  line = "#{user.email},"
+
+  taxonomies.each do |taxonomy|
+    if user.taxons.pluck(:id).include?(taxonomy.id)
+      line << "1"
+    end
+    line << ","
+  end
+  lines << line
+end
+
+headers_write = "Email,#{headers.join(",")}\n\r"
+lines_write = "#{lines.join("\n\r")}\n\r"
+
+filename = "public/emails.csv"
+
+f = File.open(filename, 'w')
+f.write headers_write
+f.write lines_write
+f.close
+```
