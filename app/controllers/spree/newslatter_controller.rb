@@ -5,10 +5,8 @@ class Spree::NewslatterController < ApplicationController
     @newslatter_user = Spree::NewslatterUser.new(newslatter_user_params)
     respond_to do |format|
       if @newslatter_user.save
-        flash[:notice] = 'Email agregado correctamente.'
         format.html { redirect_to(newslatter_redirect_success) }
       else
-        flash[:error] = 'El email ya se encuentra guardado.'
         format.html { redirect_to(newslatter_redirect_error) }
       end
     end
@@ -17,6 +15,6 @@ class Spree::NewslatterController < ApplicationController
   private
 
   def newslatter_user_params
-    params.require(:newslatter_user).permit(:email, taxon_ids: [])
+    params.require(:newslatter_user).permit(:email, taxon_ids: []).merge(campaign: current_campaign)
   end
 end
