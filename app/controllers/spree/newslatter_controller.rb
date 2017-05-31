@@ -5,10 +5,10 @@ class Spree::NewslatterController < ApplicationController
     @newslatter_user = Spree::NewslatterUser.new(newslatter_user_params)
     respond_to do |format|
       if @newslatter_user.save
-        format.js   { render 'spree/shared/newslatter_redirect_success.js.erb' }
+        format.js   { render "spree/#{newslatter_redirect_success}.js.erb" }
         format.html { redirect_to(newslatter_redirect_success) }
       else
-        format.js   { render 'spree/shared/newslatter_redirect_error.js.erb' }
+        format.js   { render "spree/#{newslatter_redirect_error}.js.erb" }
         format.html { redirect_to(newslatter_redirect_error) }
       end
     end
